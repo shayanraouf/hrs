@@ -1,0 +1,23 @@
+{
+  "name": "hrs",
+  "version": "1.0.0",
+  "description": "Hotel Reservation System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shayanraouf/hrs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shayanraouf/hrs/issues"
+  },
+  "homepage": "https://github.com/shayanraouf/hrs#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
