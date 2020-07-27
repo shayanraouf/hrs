@@ -1,40 +1,25 @@
 const express = require('express');
-const mysql = require('mysql');
-
-const con = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'password',
-    database: 'test_db'
-});
-
-con.connect((err) => {
-    if(err){
-      console.log('Error connecting to Db');
-      return;
-    }
-    console.log('Connection established');
-  });
-
-  con.query('SELECT * FROM rooms', (err,rows) => {
-    if(err) throw err;
-  
-    console.log('Data received from Db:');
-    console.log(rows);
-  });
-  
-  con.end((err) => {
-    // The connection is terminated gracefully
-    // Ensures all remaining queries are executed
-    // Then sends a quit packet to the MySQL server.
-  });
-
-
+const bodyParser = require("body-parser");
+const keys = require('./config/keys');
+const mysql = keys.mysql
+const Guest = require('./models/Guest');
 
 const app = express();
+require('./models/Guest')
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+const PORT = process.env.PORT || 5000;
+
+require('./routes/createRoom')(app);
+require('./routes/getAllRooms')(app);
 
 app.get('/', (req, res) => {
     res.send({ hi: 'there' });
 });
 
-app.listen(5000);
+app.listen(PORT, () => {
+    console.log("Express server listening on port 5000");
+});
